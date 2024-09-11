@@ -1183,6 +1183,8 @@ class RedisCluster(AbstractRedisCluster, RedisClusterCommands):
                 self.nodes_manager.startup_nodes.pop(target_node.name, None)
                 # Reset the cluster node's connection
                 target_node.redis_connection = None
+                print("inside the _execute_command function")
+                print(target_node)
                 self.nodes_manager.initialize()
                 raise e
             except MovedError as e:
@@ -1562,6 +1564,8 @@ class NodesManager:
             except Exception as e:
                 # Try the next startup node.
                 # The exception is saved and raised only if we have no more nodes.
+                print("inside the INITIALIZE function")
+                print(self.startup_nodes)
                 exception = e
                 continue
 
