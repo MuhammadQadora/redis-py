@@ -1184,6 +1184,7 @@ class RedisCluster(AbstractRedisCluster, RedisClusterCommands):
                 # Reset the cluster node's connection
                 target_node.redis_connection = None
                 print("inside the _execute_command function")
+                print("\n#\n")
                 print(target_node)
                 self.nodes_manager.initialize()
                 raise e
@@ -1543,6 +1544,9 @@ class NodesManager:
         fully_covered = False
         kwargs = self.connection_kwargs
         exception = None
+        print("THE CURRENT STARTUP_NODES")
+        print("\n#\n")
+        print(self.startup_nodes)
         for startup_node in self.startup_nodes.values():
             try:
                 if startup_node.redis_connection:
@@ -1565,10 +1569,12 @@ class NodesManager:
                 # Try the next startup node.
                 # The exception is saved and raised only if we have no more nodes.
                 print("inside the INITIALIZE function")
-                print(self.startup_nodes)
+                print(startup_node)
                 exception = e
                 continue
-
+            print("THESE ARE THE CLUSTER SLOTS")
+            print("\n#\n")
+            print(cluster_slots)
             # CLUSTER SLOTS command results in the following output:
             # [[slot_section[from_slot,to_slot,master,replica1,...,replicaN]]]
             # where each node contains the following list: [IP, port, node_id]
