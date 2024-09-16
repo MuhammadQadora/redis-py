@@ -1559,7 +1559,7 @@ class NodesManager:
                     self.startup_nodes[startup_node.name].redis_connection = r
                 # Make sure cluster mode is enabled on this node
                 try:
-                    print("DELAYING THE CLUSTER SLOTS COMMAND< MAYBE IT IS NOT GETTING THE CORRECT SLOTS)
+                    print("DELAYING THE CLUSTER SLOTS COMMAND< MAYBE IT IS NOT GETTING THE CORRECT SLOTS")
                     time.sleep(60)
                     cluster_slots = str_if_bytes(r.execute_command("CLUSTER SLOTS"))
                 except ResponseError:
