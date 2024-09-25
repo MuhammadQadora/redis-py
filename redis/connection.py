@@ -301,6 +301,7 @@ class AbstractConnection:
         if self._sock:
             return
         try:
+            print(self._connect())
             sock = self.retry.call_with_retry(
                 lambda: self._connect(), lambda error: self.disconnect(error)
             )
