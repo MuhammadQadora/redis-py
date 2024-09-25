@@ -58,6 +58,7 @@ class Retry:
         self._backoff.reset()
         failures = 0
         while True:
+            print(failures)
             try:
                 return do()
             except self._supported_errors as error:
