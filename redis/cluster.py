@@ -1183,9 +1183,9 @@ class RedisCluster(AbstractRedisCluster, RedisClusterCommands):
                 self.nodes_manager.startup_nodes.pop(target_node.name, None)
                 # Reset the cluster node's connection
                 target_node.redis_connection = None
-                print("inside the _execute_command function")
-                print("\n#\n")
-                print(target_node)
+                
+                
+                
                 self.nodes_manager.initialize()
                 raise e
             except MovedError as e:
@@ -1544,9 +1544,9 @@ class NodesManager:
         fully_covered = False
         kwargs = self.connection_kwargs
         exception = None
-        print("THE CURRENT STARTUP_NODES")
-        print("\n#\n")
-        print(self.startup_nodes)
+        
+        
+        
         for startup_node in self.startup_nodes.values():
             try:
                 if startup_node.redis_connection:
@@ -1559,7 +1559,7 @@ class NodesManager:
                     self.startup_nodes[startup_node.name].redis_connection = r
                 # Make sure cluster mode is enabled on this node
                 try:
-                    print("DELAYING THE CLUSTER SLOTS COMMAND< MAYBE IT IS NOT GETTING THE CORRECT SLOTS")
+                    
                     time.sleep(60)
                     cluster_slots = str_if_bytes(r.execute_command("CLUSTER SLOTS"))
                 except ResponseError:
@@ -1570,13 +1570,13 @@ class NodesManager:
             except Exception as e:
                 # Try the next startup node.
                 # The exception is saved and raised only if we have no more nodes.
-                print("inside the INITIALIZE function")
-                print(startup_node)
+                
+                
                 exception = e
                 continue
-            print("THESE ARE THE CLUSTER SLOTS")
-            print("\n#\n")
-            print(cluster_slots)
+            
+            
+            
             # CLUSTER SLOTS command results in the following output:
             # [[slot_section[from_slot,to_slot,master,replica1,...,replicaN]]]
             # where each node contains the following list: [IP, port, node_id]
@@ -2375,7 +2375,7 @@ class ClusterPipeline(RedisCluster):
 
 def block_pipeline_command(name: str) -> Callable[..., Any]:
     """
-    Prints error because some pipelined commands should
+    
     be blocked when running in cluster-mode
     """
 
