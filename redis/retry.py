@@ -67,5 +67,9 @@ class Retry:
                 if self._retries >= 0 and failures > self._retries:
                     raise error
                 backoff = self._backoff.compute(failures)
+                print("The backoff before the if")
+                print(backoff)
                 if backoff > 0:
+                    print("inside the if backoff")
+                    print(backoff)
                     sleep(backoff)
