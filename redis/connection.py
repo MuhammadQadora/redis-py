@@ -698,6 +698,7 @@ class Connection(AbstractConnection):
         for res in socket.getaddrinfo(
             self.host, self.port, self.socket_type, socket.SOCK_STREAM
         ):
+            print(res)
             family, socktype, proto, canonname, socket_address = res
             sock = None
             try:
