@@ -1157,6 +1157,7 @@ class RedisCluster(AbstractRedisCluster, RedisClusterCommands):
 
                 redis_node = self.get_redis_connection(target_node)
                 connection = get_connection(redis_node, *args, **kwargs)
+                print(connection)
                 if asking:
                     connection.send_command("ASKING")
                     redis_node.parse_response(connection, "ASKING", **kwargs)
@@ -2163,6 +2164,7 @@ class ClusterPipeline(RedisCluster):
                     redis_node = self.get_redis_connection(node)
                     try:
                         connection = get_connection(redis_node, c.args)
+                        print(connection)
                     except ConnectionError:
                         for n in nodes.values():
                             n.connection_pool.release(n.connection)
