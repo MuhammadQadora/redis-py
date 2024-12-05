@@ -65,6 +65,7 @@ class Retry:
                 fail(error)
                 if self._retries >= 0 and failures > self._retries:
                     raise error
+                print(f"The number of failures is {failures}")
                 backoff = self._backoff.compute(failures)
                 if backoff > 0:
                     sleep(backoff)
